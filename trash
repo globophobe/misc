@@ -1,1 +1,54 @@
-/Users/alex/Documents/System/bin/trash
+#!/usr/bin/python
+
+import os
+import time
+from optparse import OptionParser
+from shutil import rmtree
+
+def main():
+    parser = OptionParser()
+    parser.add_option("-e", "--empty", action='store_true', dest="empty",
+                      help='irrecoverably removes all files in ~/.Trash')
+
+    (options, args) = parser.parse_args()
+
+    if not options.empty and not args:
+        print "A basic trashcan replacement for the 'rm' utility to safetly move files instead of deleting them."
+        print "Try 'trash -h'"
+    
+    trashcan = os.path.expanduser('~/.Trash')
+    if not os.path.exists(trashcan):
+        os.mkdir(trashcan)
+    trash(args, trashcan)
+    if options.empty:
+        empty(trashcan)
+
+def trash(junk, trashcan):
+    for i in junk:
+        if os.path.exists(i):
+            if i.endswith('/'):
+                i = i[:-1]
+            crumple = os.path.split(i)[1]
+            toss = os.path.join(trashcan, crumple)
+            if os.path.exists(toss):
+                timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                if '.' in crumple:
+                    index = crumple.rfind('.')
+                    timestamped = '%s %s%s' % (crumple[:index],
+                                               timestamp,
+                                               crumple[index:len(crumple)])
+                else:
+                    timestamped = '%s %s' % (crumple, timestamp)
+                os.rename(toss, os.path.join(trashcan, timestamped))
+            os.rename(i, toss)
+            
+def empty(trashcan):
+    for j in os.listdir(trashcan):
+        toss = os.path.join(trashcan, j)
+        if os.path.isdir(toss):
+            rmtree(toss)
+        if os.path.isfile(toss):
+            os.remove(toss)
+
+if __name__ == '__main__':
+    main()
