@@ -1,0 +1,1 @@
+/Users/alex/.config/nvim/init.vim
