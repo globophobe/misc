@@ -63,20 +63,17 @@ let g:fzf_buffers_jump = 1
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" s{char} to move to {char}
+map  s <Plug>(easymotion-bd-f)
+nmap s <Plug>(easymotion-overwin-f)
 
 " Move to line
 map <Leader>l <Plug>(easymotion-bd-jk)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
