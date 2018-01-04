@@ -23,7 +23,6 @@ set number
 let mapleader = ','
 :tnoremap <Esc> <C-\><C-n>
 
-set textwidth=80
 set colorcolumn=+1
 
 set nofoldenable
