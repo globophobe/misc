@@ -52,9 +52,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 map <Leader>x :Explore <CR>
 
-map <C-p> :FZF <CR>
+map <C-p> :History <CR>
 noremap <C-b> :Buffers<CR>
-noremap <C-h> :History<CR>
+noremap <C-h> :FZF <CR>
 let g:fzf_buffers_jump = 1
 
 " From the minimal but useful vimrc example:
