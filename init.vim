@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 "
-Plug 'cocopon/iceberg.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'davidhalter/jedi-vim'
@@ -26,6 +25,7 @@ let mapleader = ','
 :tnoremap <Esc> <C-\><C-n>
 
 set colorcolumn=+1
+set backupcopy=yes
 
 set nofoldenable
 
