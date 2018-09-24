@@ -10,7 +10,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
@@ -35,18 +34,26 @@ set tabstop=2
 set expandtab
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4
 
+let g:jedi#completions_enabled = 0
+let g:pymode_rope = 0
+" b/c: from foo import import bar
+let g:jedi#smart_auto_mappings = 0
+
+let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_save = 1
-let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['flake8']}
-let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'python': ['isort', 'yapf']}
+let g:ale_python_flake8_args=""
+let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['pylint', 'flake8 --max-line-length=89']}
+let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'python': ['isort', 'black']}
 let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_options = '--single-quote'
+" let g:ale_javascript_prettier_options = '--trailing-comma es5'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
+let g:jedi#force_py_version = 3
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
