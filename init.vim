@@ -87,3 +87,5 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+
+nnoremap <leader>p oimport pdb; pdb.set_trace()<Esc>
