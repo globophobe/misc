@@ -45,7 +45,7 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_save = 1
 let g:ale_python_flake8_args=""
-let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['pylint', 'flake8 --max-line-length=89']}
+let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['flake8']}
 let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'python': ['isort', 'black']}
 let g:ale_fix_on_save = 1
 " let g:ale_javascript_prettier_options = '--trailing-comma es5'
