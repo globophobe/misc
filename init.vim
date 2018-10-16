@@ -12,8 +12,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
 Plug 'posva/vim-vue'
 "
 call plug#end()
@@ -40,11 +38,6 @@ let g:jedi#completions_enabled = 0
 let g:pymode_rope = 0
 " b/c: from foo import import bar
 let g:jedi#smart_auto_mappings = 0
-
-let g:lsc_server_commands = {'dart': 'dart_language_server'}
-let dart_html_in_string=v:true
-let dart_style_guide = 2
-let dart_format_on_save = 1
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
