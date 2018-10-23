@@ -17,8 +17,6 @@ Plug 'posva/vim-vue'
 call plug#end()
 
 colorscheme nord
-
-set number
 let mapleader = ','
 :tnoremap <Esc> <C-\><C-n>
 
@@ -32,9 +30,10 @@ set tabstop=2
 
 :filetype on
 set expandtab
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
 let g:jedi#completions_enabled = 0
+let g:deoplete#sources#jedi#show_docstring = 0
 let g:pymode_rope = 0
 " b/c: from foo import import bar
 let g:jedi#smart_auto_mappings = 0
@@ -44,6 +43,7 @@ let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_save = 1
+" Python
 let g:ale_python_flake8_args=""
 let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['flake8']}
 let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'python': ['isort', 'black']}
@@ -62,7 +62,7 @@ map <Leader>x :Explore <CR>
 
 map <C-p> :FZF <CR>
 noremap <C-h> :Buffers<CR>
-let g:fzf_buffers_jump = 1
+" let g:fzf_buffers_jump = 1
 
 " From the minimal but useful vimrc example:
 " https://github.com/easymotion/vim-easymotion
