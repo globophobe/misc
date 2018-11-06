@@ -2,15 +2,16 @@ call plug#begin('~/.vim/plugged')
 "
 Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/deoplete.nvim'
-Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'raimondi/delimitmate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
 "
@@ -45,10 +46,10 @@ let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_save = 1
 " Python
 let g:ale_python_flake8_args=""
-let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'python': ['flake8']}
-let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'python': ['isort', 'black']}
+let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'typescript': ['tslint'], 'python': ['flake8']}
+let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['tslint'], 'vue': ['prettier'], 'html': ['prettier'], 'python': ['isort', 'black']}
 let g:ale_fix_on_save = 1
-" let g:ale_javascript_prettier_options = '--trailing-comma es5'
+let g:ale_javascript_prettier_use_global = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
