@@ -2,7 +2,8 @@ call plug#begin('~/.vim/plugged')
 "
 Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
+" Plug 'zchee/deoplete-jedi'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -33,11 +34,7 @@ set tabstop=2
 set expandtab
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
-let g:jedi#completions_enabled = 0
-let g:deoplete#sources#jedi#show_docstring = 0
 let g:pymode_rope = 0
-" b/c: from foo import import bar
-let g:jedi#smart_auto_mappings = 0
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
@@ -53,9 +50,16 @@ let g:ale_javascript_prettier_use_global = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-let g:jedi#completions_enabled = 1
-let g:jedi#force_py_version = 3
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 0
+let g:jedi#force_py_version = 3
+" Without deoplete
+let g:jedi#completions_enabled = 1 
+" b/c: from foo import import bar
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#goto_command = "<leader>g"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#usages_command = "<leader>n"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
