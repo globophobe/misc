@@ -44,7 +44,7 @@ let g:ale_lint_on_save = 1
 " Python
 let g:ale_python_flake8_args=""
 let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'typescript': ['tslint'], 'python': ['flake8']}
-let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['tslint'], 'vue': ['prettier'], 'html': ['prettier'], 'python': ['isort', 'black']}
+let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'html': ['prettier'], 'json': ['prettier'], 'python': ['isort', 'black']}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_global = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
