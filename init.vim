@@ -8,13 +8,13 @@ Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'raimondi/delimitmate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 "
 call plug#end()
 
