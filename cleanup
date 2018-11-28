@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+import os
+import shutil
+import subprocess
+
+PIP_CACHE_DIR = "~/Library/Caches/pip/http"
+XCODE_DERIVED_DATA_DIR = "~/Library/Developer/Xcode/DerivedData"
+COCOA_POD_CACHE_DIR = "~/Library/Caches/CocoaPods"
+
+
+def delete_files(directory):
+    absolute_path = os.path.expanduser(directory)
+    paths = os.listdir(absolute_path)
+    for path in paths:
+        p = os.path.join(absolute_path, path)
+        shutil.rmtree(p)
+
+
+def cleanup_homebrew():
+    subprocess.check_call(["brew", "cleanup", "-s"])
+
+
+def clean_pip_cache():
+    delete_files(PIP_CACHE_DIR)
+
+
+def clean_yarn_cache():
+    subprocess.check_call(["yarn", "cache", "clean"])
+
+
+def xcode_derived_data():
+    delete_files(XCODE_DERIVED_DATA_DIR)
+
+
+def clean_cocoa_pods():
+    subprocess.check_call(["pod", "cache", "--clean", "all"])
+
+
+if __name__ == "__main__":
+    cleanup_homebrew()
+    clean_pip_cache()
+    clean_yarn_cache()
+    xcode_derived_data()
