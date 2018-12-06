@@ -3,8 +3,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/deoplete.nvim'
 Plug 'davidhalter/jedi-vim'
-" Plug 'zchee/deoplete-jedi'
+Plug 'JuliaEditorSupport/julia-vim'
 Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
@@ -36,6 +37,17 @@ autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
 let g:pymode_rope = 0
 
+" language server
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
+\       import LanguageServer;
+\       server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
+\       server.runlinter = true;
+\       run(server);
+\   '],
+\ }
+
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1
@@ -44,8 +56,23 @@ let g:ale_lint_on_save = 1
 " Python
 let g:ale_python_flake8_args=""
 let g:ale_python_mypy_options="--ignore-missing-imports"
-let g:ale_linters = {'html': [], 'javascript': ['eslint'], 'vue': ['eslint'], 'typescript': ['tslint'], 'python': ['flake8', 'mypy']}
-let g:ale_fixers = {'css': ['prettier'], 'javascript': ['prettier'], 'typescript': ['prettier'], 'vue': ['prettier'], 'html': ['prettier'], 'json': ['prettier'], 'python': ['isort', 'black']}
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy'],
+\   'julia': ['languageserver'],
+\   'html': [],
+\   'javascript': ['eslint'],
+\   'vue': ['eslint'],
+\   'typescript': ['tslint']
+\ }
+let g:ale_fixers = {
+\   'python': ['isort', 'black'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'vue': ['prettier'],
+\   'html': ['prettier'],
+\   'css': ['prettier'],
+\   'json': ['prettier']
+\ }
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_global = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -61,6 +88,11 @@ let g:jedi#smart_auto_mappings = 0
 let g:jedi#goto_command = "<leader>g"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#usages_command = "<leader>n"
+" Language client
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" Tabs
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
