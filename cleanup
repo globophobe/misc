@@ -3,8 +3,11 @@ import os
 import shutil
 import subprocess
 
+import fire
+
 XCODE_APP_PLATFORM_DIR = "/Applications/Xcode.app/Contents/Developer/Platforms"
 PIP_CACHE_DIR = "~/Library/Caches/pip/http"
+PIPENV_CACHE_DIR = "~/Library/Caches/pipenv"
 XCODE_DERIVED_DATA_DIR = "~/Library/Developer/Xcode/DerivedData"
 COCOA_POD_CACHE_DIR = "~/Library/Caches/CocoaPods"
 
@@ -23,6 +26,11 @@ def cleanup_homebrew():
 
 def clean_pip_cache():
     delete_files(PIP_CACHE_DIR)
+
+
+def clean_pipenv_cache():
+    absolute_path = os.path.expanduser(PIPENV_CACHE_DIR)
+    shutil.rmtree(absolute_path)
 
 
 def clean_yarn_cache():
@@ -50,9 +58,15 @@ def clean_cocoa_pods():
     subprocess.check_call(["pod", "cache", "--clean", "all"])
 
 
-if __name__ == "__main__":
+def main(derived=0):
     cleanup_homebrew()
     clean_pip_cache()
+    clean_pipenv_cache()
     clean_yarn_cache()
     xcode_app_platform()
-    xcode_derived_data()
+    if derived:
+        xcode_derived_data()
+
+
+if __name__ == "__main__":
+    fire.Fire(main)
