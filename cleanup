@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 
+XCODE_APP_PLATFORM_DIR = "/Applications/Xcode.app/Contents/Developer/Platforms"
 PIP_CACHE_DIR = "~/Library/Caches/pip/http"
 XCODE_DERIVED_DATA_DIR = "~/Library/Developer/Xcode/DerivedData"
 COCOA_POD_CACHE_DIR = "~/Library/Caches/CocoaPods"
@@ -28,6 +29,19 @@ def clean_yarn_cache():
     subprocess.check_call(["yarn", "cache", "clean"])
 
 
+def xcode_app_platform():
+    platforms = (
+        'WatchOS.platform',
+        'AppleTVOS.platform',
+        'WatchSimulator.platform',
+        'AppleTVSimulator.platform'
+    )
+    for platform in platforms:
+        path = os.path.join(XCODE_APP_PLATFORM_DIR, platform)
+        if os.path.exists(path):
+            shutil.rmtree(path)
+
+
 def xcode_derived_data():
     delete_files(XCODE_DERIVED_DATA_DIR)
 
@@ -40,4 +54,5 @@ if __name__ == "__main__":
     cleanup_homebrew()
     clean_pip_cache()
     clean_yarn_cache()
+    xcode_app_platform()
     xcode_derived_data()
