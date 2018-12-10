@@ -13,7 +13,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 "
@@ -81,7 +80,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 0
 let g:jedi#force_py_version = 3
-" Without deoplete
+" Not deoplete
 let g:jedi#completions_enabled = 1 
 " b/c: from foo import import bar
 let g:jedi#smart_auto_mappings = 0
