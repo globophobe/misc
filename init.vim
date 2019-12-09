@@ -2,10 +2,9 @@ call plug#begin('~/.vim/plugged')
 "
 Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/denite.nvim'
 Plug 'davidhalter/jedi-vim'
-Plug 'JuliaEditorSupport/julia-vim'
 Plug 'w0rp/ale'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': './install.sh'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
@@ -14,9 +13,9 @@ Plug 'tpope/vim-commentary'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
+Plug 'jparise/vim-graphql'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-"
 call plug#end()
 
 colorscheme nord
@@ -35,18 +34,12 @@ set tabstop=2
 set expandtab
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
-let g:pymode_rope = 0
+augroup FiletypeGroup
+    autocmd!
+    au BufNewFile,BufRead *.ts set filetype=typescript
+augroup END
 
-" language server
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       import LanguageServer;
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, false);
-\       server.runlinter = true;
-\       run(server);
-\   '],
-\ }
+let g:pymode_rope = 0
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
@@ -58,9 +51,9 @@ let g:ale_python_flake8_args=""
 let g:ale_python_mypy_options="--ignore-missing-imports"
 let g:ale_linters = {
 \   'python': ['flake8', 'mypy'],
-\   'julia': ['languageserver'],
 \   'html': [],
 \   'javascript': ['eslint'],
+\   'graphql': ['eslint'],
 \   'vue': ['eslint'],
 \   'typescript': ['tslint']
 \ }
@@ -68,6 +61,7 @@ let g:ale_fixers = {
 \   'python': ['isort', 'black'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
+\   'graphql': ['prettier'],
 \   'vue': ['prettier'],
 \   'html': ['prettier'],
 \   'css': ['prettier'],
@@ -81,17 +75,13 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 0
 let g:jedi#force_py_version = 3
-" Not deoplete
-let g:jedi#completions_enabled = 1 
-" b/c: from foo import import bar
+" No, jedi completions too slow...
+let g:jedi#completions_enabled = 0 
+" No, because 'from foo import import bar'
 let g:jedi#smart_auto_mappings = 0
 let g:jedi#goto_command = "<leader>g"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#usages_command = "<leader>n"
-" Language client
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " Tabs
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
