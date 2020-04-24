@@ -10,6 +10,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
@@ -40,6 +41,8 @@ augroup FiletypeGroup
 augroup END
 
 let g:pymode_rope = 0
+
+let g:python3_host_prog = expand('~/miniconda3/bin/python')
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
