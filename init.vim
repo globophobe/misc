@@ -10,13 +10,15 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" JS
 Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 Plug 'jparise/vim-graphql'
-Plug 'HerringtonDarkholme/yats.vim'
+" TS
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'HerringtonDarkholme/yats.vim'
+" Go
+Plug 'fatih/vim-go'
 call plug#end()
 
 colorscheme nord
@@ -42,7 +44,7 @@ augroup END
 
 let g:pymode_rope = 0
 
-let g:python3_host_prog = expand('~/miniconda3/bin/python')
+let g:python3_host_prog = '/usr/bin/python3' "expand('~/miniconda3/bin/python')
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
@@ -54,14 +56,16 @@ let g:ale_python_flake8_args=""
 let g:ale_python_mypy_options="--ignore-missing-imports"
 let g:ale_linters = {
 \   'python': ['flake8', 'mypy'],
+\   'go': ['golint'],
 \   'html': [],
 \   'javascript': ['eslint'],
+\   'typescript': ['tsserver'],
 \   'graphql': ['eslint'],
 \   'vue': ['eslint'],
-\   'typescript': ['tslint']
 \ }
 let g:ale_fixers = {
 \   'python': ['isort', 'black'],
+\   'go': ['gofmt'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'graphql': ['prettier'],
@@ -72,6 +76,8 @@ let g:ale_fixers = {
 \ }
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_global = 1
+" let g:go_fmt_fail_silently = 1
+
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
