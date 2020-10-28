@@ -70,7 +70,7 @@ let g:ale_fixers = {
 \   'typescript': ['prettier'],
 \   'graphql': ['prettier'],
 \   'vue': ['prettier'],
-\   'html': ['prettier'],
+\   'html': [],
 \   'css': ['prettier'],
 \   'json': ['prettier']
 \ }
