@@ -7,7 +7,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " JS
@@ -101,28 +101,9 @@ map <C-p> :FZF <CR>
 noremap <C-h> :Buffers<CR>
 " let g:fzf_buffers_jump = 1
 
-" From the minimal but useful vimrc example:
-" https://github.com/easymotion/vim-easymotion
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:sneak#label = 1
 
-" s{char} to move to {char}
-map  s <Plug>(easymotion-bd-f)
-nmap s <Plug>(easymotion-overwin-f)
-
-" Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-
-nnoremap <leader>p oimport pdb; pdb.set_trace()<Esc>
+noremap <leader>p oimport pdb; pdb.set_trace()<Esc>
