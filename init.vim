@@ -19,6 +19,8 @@ Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'HerringtonDarkholme/yats.vim'
 " Go
 Plug 'fatih/vim-go'
+" Rust
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 colorscheme nord
@@ -44,7 +46,7 @@ augroup END
 
 let g:pymode_rope = 0
 
-let g:python3_host_prog = '/usr/bin/python3' "expand('~/miniconda3/bin/python')
+let g:python3_host_prog = '/usr/bin/python3.8'
 
 let ale_python_auto_pipenv = 1
 let g:ale_completion_enabled = 1
@@ -59,7 +61,7 @@ let g:ale_linters = {
 \   'go': ['golint'],
 \   'html': [],
 \   'javascript': ['eslint'],
-\   'typescript': ['tsserver'],
+\   'typescript': ['eslint'],
 \   'graphql': ['eslint'],
 \   'vue': ['eslint'],
 \ }
@@ -75,7 +77,7 @@ let g:ale_fixers = {
 \   'json': ['prettier']
 \ }
 let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_eslint_options = "-c ./.eslintrc.custom.js"
 " let g:go_fmt_fail_silently = 1
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
