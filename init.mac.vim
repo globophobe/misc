@@ -3,7 +3,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'Shougo/deoplete.nvim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -15,26 +15,25 @@ Plug 'airblade/vim-gitgutter'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 call plug#end()
 
-let g:python3_host_prog = '/usr/bin/env python'
-
 autocmd VimEnter * CHADopen --nofocus
+
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 0
 
 lua << EOF
 local lsp = require "lspconfig"
-local coq = require "coq"
 
-lsp.pyright.setup{coq.lsp_ensure_capabilities()}
-lsp.tsserver.setup{coq.lsp_ensure_capabilities()}
-
-vim.cmd('COQnow -s')
+lsp.tsserver.setup{}
+-- lsp.volar.setup{}
 EOF
 
 map <C-p> :FZF <CR>
 nnoremap <C-b> <cmd>Telescope registers<cr>
 nnoremap <C-s> <cmd>Telescope lsp_document_symbols<cr>
 
-nmap <silent> <C-k> :lua vim.lsp.diagnostic.goto_prev()<cr>
-nmap <silent> <C-j> :lua vim.lsp.diagnostic.goto_next()<cr>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 colorscheme nord
 let mapleader = ','
@@ -56,10 +55,24 @@ augroup FiletypeGroup
     autocmd!
     au BufNewFile,BufRead *.ts set filetype=typescript
     au BufNewFile,BufRead *.js set filetype=typescript
+    au BufNewFile,BufRead *.vue set filetype=vue
 augroup END
 
 let g:pydocstring_formatter = 'google'
 
+let g:ale_fix_on_save = 1
+
+" Import order, and other customization
+let g:ale_javascript_eslint_options = "-c ./.eslintrc.custom.js"
+
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'html': [],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'graphql': ['eslint'],
+\   'vue': ['eslint'],
+\ }
 let g:ale_fixers = {
 \   'python': ['isort', 'black'],
 \   'javascript': ['prettier'],
@@ -70,7 +83,6 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'json': ['prettier']
 \ }
-let g:ale_fix_on_save = 1
 
 " Tab completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
