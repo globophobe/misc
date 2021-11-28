@@ -1,23 +1,24 @@
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'arcticicestudio/nord-vim'
-Plug 'justinmk/vim-sneak'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
 " Python
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 call plug#end()
 
-let g:python3_host_prog = '/usr/bin/python3.8'
+let g:python3_host_prog = '/usr/bin/env python'
 
-autocmd VimEnter * CHADopen
-autocmd VimEnter * COQnow [--shut-up]
+autocmd VimEnter * CHADopen --nofocus
 
 lua << EOF
 local lsp = require "lspconfig"
@@ -25,7 +26,13 @@ local coq = require "coq"
 
 lsp.pyright.setup{coq.lsp_ensure_capabilities()}
 lsp.tsserver.setup{coq.lsp_ensure_capabilities()}
+
+vim.cmd('COQnow -s')
 EOF
+
+map <C-p> :FZF <CR>
+nnoremap <C-b> <cmd>Telescope<cr>
+nnoremap <C-s> <cmd>Telescope lsp_document_symbols<cr>
 
 nmap <silent> <C-k> :lua vim.lsp.diagnostic.goto_prev()<cr>
 nmap <silent> <C-j> :lua vim.lsp.diagnostic.goto_next()<cr>
@@ -66,13 +73,12 @@ let g:ale_fixers = {
 \ }
 let g:ale_fix_on_save = 1
 
-nnoremap <leader>x <cmd>CHADopen<cr>
+" Tab completion
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-map <C-p> :FZF <cr>
-noremap <C-h> :Buffers<cr>
-let g:fzf_buffers_jump = 1
-
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+map <leader>x :Explore <CR>
 
 noremap <leader>p oimport pdb; pdb.set_trace()<Esc>
+noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
+
+noremap <leader>d :PydocstringFormat<Esc>
