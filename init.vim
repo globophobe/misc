@@ -21,10 +21,9 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 0
 
 lua << EOF
-local lsp = require "lspconfig"
+-- local lsp = require "lspconfig"
 -- local coq = require "coq"
 
-lsp.tsserver.setup{}
 -- lsp.tsserver.setup{coq.lsp.ensure_capabilities()}
 -- lsp.pyright.setup{coq.lsp_ensure_capabilities()}
 -- lsp.volar.setup{coq.lsp.ensure_capabilities()}
@@ -34,6 +33,7 @@ EOF
 map <C-p> :FZF <CR>
 nnoremap <C-b> <cmd>Telescope registers<cr>
 nnoremap <C-s> <cmd>Telescope lsp_document_symbols<cr>
+autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
