@@ -2,8 +2,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'Shougo/deoplete.nvim'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'arcticicestudio/nord-vim'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -15,26 +16,29 @@ Plug 'airblade/vim-gitgutter'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 call plug#end()
 
-let g:python3_host_prog = '/usr/bin/env python'
-
-autocmd VimEnter * CHADopen --nofocus
+let g:python3_host_prog = '/usr/bin/python3'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 0
 
 lua << EOF
 local lsp = require "lspconfig"
-local coq = require "coq"
+-- local coq = require "coq"
 
-lsp.pyright.setup{coq.lsp_ensure_capabilities()}
-lsp.tsserver.setup{coq.lsp_ensure_capabilities()}
-
-vim.cmd('COQnow -s')
+lsp.tsserver.setup{}
+-- lsp.tsserver.setup{coq.lsp.ensure_capabilities()}
+-- lsp.pyright.setup{coq.lsp_ensure_capabilities()}
+-- lsp.volar.setup{coq.lsp.ensure_capabilities()}
+-- vim.cmd('COQnow -s')
 EOF
 
 map <C-p> :FZF <CR>
 nnoremap <C-b> <cmd>Telescope registers<cr>
 nnoremap <C-s> <cmd>Telescope lsp_document_symbols<cr>
 
-nmap <silent> <C-k> :lua vim.lsp.diagnostic.goto_prev()<cr>
-nmap <silent> <C-j> :lua vim.lsp.diagnostic.goto_next()<cr>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <C-k> :lua vim.lsp.diagnostic.goto_prev()<cr>
+" nmap <silent> <C-j> :lua vim.lsp.diagnostic.goto_next()<cr>
 
 colorscheme nord
 let mapleader = ','
@@ -60,6 +64,14 @@ augroup END
 
 let g:pydocstring_formatter = 'google'
 
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'html': [],
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'graphql': ['eslint'],
+\   'vue': ['eslint'],
+\ }
 let g:ale_fixers = {
 \   'python': ['isort', 'black'],
 \   'javascript': ['prettier'],
