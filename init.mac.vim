@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'editorconfig/editorconfig-vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -68,6 +69,7 @@ let g:ale_fix_on_save = 1
 
 " Import order, and other customization
 let g:ale_javascript_eslint_options = "-c ./.eslintrc.custom.js"
+let g:ale_python_flake8_options = "--max-line-length=119"
 
 let g:ale_linters = {
 \   'python': ['flake8'],
