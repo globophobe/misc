@@ -11,9 +11,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
-" Python
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
@@ -21,12 +19,13 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 0
 
 lua << EOF
+require('gitsigns').setup()
 -- local lsp = require "lspconfig"
 -- local coq = require "coq"
 
--- lsp.tsserver.setup{coq.lsp.ensure_capabilities()}
+-- lsp.tsserver.setup{coq.lsp_ensure_capabilities()}
 -- lsp.pyright.setup{coq.lsp_ensure_capabilities()}
--- lsp.volar.setup{coq.lsp.ensure_capabilities()}
+-- lsp.volar.setup{coq.lsp_ensure_capabilities()}
 -- vim.cmd('COQnow -s')
 EOF
 
@@ -62,7 +61,10 @@ augroup FiletypeGroup
     au BufNewFile,BufRead *.js set filetype=typescript
 augroup END
 
-let g:pydocstring_formatter = 'google'
+let g:ale_fix_on_save = 1
+
+" Import order, and other customization
+let g:ale_javascript_eslint_options = "-c ./.eslintrc.custom.js"
 
 let g:ale_linters = {
 \   'python': ['flake8'],
@@ -70,10 +72,11 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'graphql': ['eslint'],
-\   'vue': ['eslint'],
+\   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
 \   'python': ['isort', 'black'],
+\   'go': ['gofmt', 'goimports'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'graphql': ['prettier'],
@@ -82,7 +85,6 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'json': ['prettier']
 \ }
-let g:ale_fix_on_save = 1
 
 " Tab completion
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
