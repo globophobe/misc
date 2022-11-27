@@ -13,7 +13,28 @@ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 lua << EOF
-require('gitsigns').setup()
+local actions = require "telescope.actions"
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.move_selection_next,
+      }
+    }
+  }
+}
+
+local actions = require("telescope.actions")
+require("telescope").setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-u>"] = false
+      },
+    },
+  }
+}
 
 vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
 
@@ -32,17 +53,7 @@ vim.keymap.set('n', '<C-g>', function()
     gitui:toggle()
 end)
 
-local actions = require "telescope.actions"
-require('telescope').setup{
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<C-j>"] = actions.move_selection_next,
-      }
-    }
-  }
-}
+require('gitsigns').setup()
 EOF
 
 map <C-p> <cmd>Telescope find_files<cr>
