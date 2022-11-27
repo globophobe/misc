@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'numToStr/FTerm.nvim'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
@@ -13,6 +14,23 @@ call plug#end()
 
 lua << EOF
 require('gitsigns').setup()
+
+vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
+
+local fterm = require("FTerm")
+
+local gitui = fterm:new({
+    ft = 'fterm_gitui',
+    cmd = "gitui",
+    dimensions = {
+        height = 0.9,
+        width = 0.9
+    }
+})
+
+vim.keymap.set('n', '<C-g>', function()
+    gitui:toggle()
+end)
 
 local actions = require "telescope.actions"
 require('telescope').setup{
