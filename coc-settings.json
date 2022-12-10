@@ -1,6 +1,6 @@
 {
   "diagnostic.displayByAle": true,
-  "suggest.noselect": true,
+  "suggest.noselect": false,
   "languageserver": {
     "go": {
       "command": "gopls",
