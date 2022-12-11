@@ -121,7 +121,8 @@ let g:ale_fixers = {
 \   'vue': ['prettier'],
 \   'html': [],
 \   'css': ['prettier'],
-\   'json': ['prettier']
+\   'json': ['prettier'],
+\   'yaml': ['prettier']
 \ }
 
 map <leader>x :Explore <CR>
