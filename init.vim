@@ -4,6 +4,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
 Plug 'dense-analysis/ale'
+Plug 'dpayne/CodeGPT.nvim'
+Plug 'muniftanjim/nui.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
