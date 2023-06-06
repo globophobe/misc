@@ -94,7 +94,7 @@ let g:ale_use_neovim_diagnostics_api = 1
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-\   'python': ['flake8'],
+\   'python': ['ruff'],
 \   'rust': ['analyzer'],
 \   'html': [],
 \   'javascript': ['eslint'],
@@ -103,7 +103,7 @@ let g:ale_linters = {
 \   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
-\   'python': ['isort', 'black'],
+\   'python': ['ruff', 'black'],
 \   'go': ['gofmt', 'goimports'],
 \   'rust': ['rustfmt'],
 \   'javascript': ['prettier'],
@@ -121,4 +121,5 @@ map <leader>x :Explore <CR>
 noremap <leader>p oimport pdb; pdb.set_trace()<Esc>
 noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
 
+let g:ale_python_ruff_options = '--config ~/stuff/misc/ruff.toml'
 let g:ale_python_flake8_options = "--max-line-length=119"

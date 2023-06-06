@@ -1,0 +1,31 @@
+exclude = [
+    ".git",
+    "__init__.py",
+    "build",
+    "migrations",
+    "venv",
+]
+ignore = [
+    "ANN002",
+    "ANN003",
+    "ANN101",
+    "ANN102",
+    "ANN401",
+    "D",
+]
+line-length = 119
+select = [
+    "ANN",
+    "D",
+    "E",
+    "F",
+    "W",
+    "I001"
+]
+unfixable = ["F401", "F841"]
+
+[per-file-ignores]
+"**/tests/*" = ["ANN"]
+
+[isort]
+known-first-party = ["api", "custom"]
