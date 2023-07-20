@@ -6,12 +6,28 @@ exclude = [
     "venv",
 ]
 ignore = [
-    "ANN002",
-    "ANN003",
-    "ANN101",
-    "ANN102",
-    "ANN401",
-    "D",
+    "ANN002", # Missing type annotation for *{name}
+    "ANN003", # Missing type annotation for **{name}
+    "ANN101", # Missing type annotation for {name} in method
+    "ANN102", # Missing type annotation for {name} in classmethod
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name}
+    "D100", # Missing docstring in public module
+    "D104", # Missing docstring in public package
+    "D106", # Missing docstring in public nested class, i.e. Meta
+    "D203", # 1 blank line required before class docstring
+    "D205", # 1 blank line required between summary line and description
+    "D212", # Multi-line docstring summary should start at the first line
+    "D213", # Multi-line docstring summary should start at the second line
+    "D400", # First line should end with a period
+    "D401", # First line should be in imperative mood
+    "D403", # First word of the first line should be properly capitalized
+    "D404", # First word of the docstring should not be This
+    "D406", # Section name should end with a newline
+    "D407", # Missing dashed underline after section
+    "D411", # Missing blank line before section
+    "D413", # Missing blank line after last section
+    "D415", # First line should end with a period, question mark, or exclamation point
+    "D417", # Missing argument description in the docstring: {name}
 ]
 line-length = 119
 select = [
@@ -20,12 +36,12 @@ select = [
     "E",
     "F",
     "W",
-    "I001"
+    "I001" # isort
 ]
 unfixable = ["F401", "F841"]
 
 [per-file-ignores]
-"**/tests/*" = ["ANN"]
+"**/tests/*" = ["ANN", "D"]
 
 [isort]
 known-first-party = ["api", "custom"]
