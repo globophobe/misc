@@ -96,7 +96,7 @@ let g:ale_disable_lsp = 1
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-\   'python': ['flake8'],
+\   'python': ['ruff'],
 \   'rust': ['analyzer'],
 \   'html': [],
 \   'javascript': ['eslint'],
@@ -105,7 +105,7 @@ let g:ale_linters = {
 \   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
-\   'python': ['isort', 'black'],
+\   'python': ['black', 'ruff'],
 \   'go': ['gofmt', 'goimports'],
 \   'rust': ['rustfmt'],
 \   'javascript': ['prettier'],
