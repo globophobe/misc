@@ -95,6 +95,7 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
 \   'python': ['ruff'],
+\   'go': ['golangci-lint'],
 \   'rust': ['analyzer'],
 \   'html': [],
 \   'javascript': ['eslint'],
