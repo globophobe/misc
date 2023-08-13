@@ -33,7 +33,6 @@ line-length = 119
 select = [
     "A", # flake8-builtins
     "ANN", # flake8-annotations
-    "ARG", # flake8-unused-arguments
     "B", # flake8-bugbear
     "D", # pydocstyle
     "E", # pycodestyle
@@ -49,6 +48,7 @@ unfixable = ["F401", "F841"]
 
 [per-file-ignores]
 "**/tests/*" = ["ANN", "D"]
+"**/migrations/*" = ["ANN", "D"]
 
 [isort]
 known-first-party = ["api", "custom"]
