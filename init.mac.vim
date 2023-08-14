@@ -5,6 +5,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
 Plug 'dense-analysis/ale'
 Plug 'dpayne/CodeGPT.nvim'
+Plug 'muniftanjim/nui.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -120,7 +121,7 @@ let g:ale_fixers = {
 
 map <leader>x :Explore <CR>
 
-noremap <leader>p oimport ipdb; pdb.set_trace()<Esc>
+noremap <leader>p oimport pdb; pdb.set_trace()<Esc>
 noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
 
 let g:ale_python_ruff_options = '--config ~/stuff/misc/ruff.toml'

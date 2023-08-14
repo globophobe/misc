@@ -11,6 +11,8 @@ ignore = [
     "ANN101", # Missing type annotation for {name} in method
     "ANN102", # Missing type annotation for {name} in classmethod
     "ANN401", # Dynamically typed expressions (typing.Any) are disallowed in {name}
+    "B007", # Loop control variable not used within loop body
+    "B904", # Within an except clause, raise exceptions with...
     "D100", # Missing docstring in public module
     "D104", # Missing docstring in public package
     "D106", # Missing docstring in public nested class, i.e. Meta
@@ -28,10 +30,12 @@ ignore = [
     "D413", # Missing blank line after last section
     "D415", # First line should end with a period, question mark, or exclamation point
     "D417", # Missing argument description in the docstring: {name}
+    "N803", # Argument name should be lowercase
+    "N806", # Variable in function should be lowercase
+    "PTH123", # open() should be replaced by Path.open()
 ]
 line-length = 119
 select = [
-    "A", # flake8-builtins
     "ANN", # flake8-annotations
     "B", # flake8-bugbear
     "D", # pydocstyle
