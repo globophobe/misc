@@ -1,10 +1,10 @@
 exclude = [
-    ".git",
     "__init__.py",
     "build",
     "migrations",
-    "venv",
 ]
+line-length = 88
+target-version = "py311"
 ignore = [
     "ANN002", # Missing type annotation for *{name}
     "ANN003", # Missing type annotation for **{name}
@@ -30,11 +30,13 @@ ignore = [
     "D413", # Missing blank line after last section
     "D415", # First line should end with a period, question mark, or exclamation point
     "D417", # Missing argument description in the docstring: {name}
+    "E501", # Line too long
+    "E721", # Do not compare types, use `isinstance()`
     "N803", # Argument name should be lowercase
     "N806", # Variable in function should be lowercase
     "PTH123", # open() should be replaced by Path.open()
+    "UP032", # [*] Use f-string instead of `format` call
 ]
-line-length = 119
 select = [
     "ANN", # flake8-annotations
     "B", # flake8-bugbear
@@ -46,6 +48,8 @@ select = [
     "N", # pep8-naming
     "PTH", # flake8-use-pathlib
     "UP", # pyupgrade
+    "RUF100", # unused-noqa
+    "RUF200", # invalid-pyproject-toml
     "W", # pycodestyle
 ]
 unfixable = ["F401", "F841"]

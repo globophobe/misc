@@ -3,7 +3,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
-Plug 'dense-analysis/ale'
+Plug 'adam-blackwater/ale'
 Plug 'dpayne/CodeGPT.nvim'
 Plug 'muniftanjim/nui.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -106,7 +106,7 @@ let g:ale_linters = {
 \   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
-\   'python': ['black', 'ruff'],
+\   'python': ['ruff'],
 \   'go': ['gofmt', 'goimports'],
 \   'rust': ['rustfmt'],
 \   'javascript': ['prettier'],
