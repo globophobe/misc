@@ -3,8 +3,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
-Plug 'dense-analysis/ale'
-Plug 'dpayne/CodeGPT.nvim'
+Plug 'adam-blackwater/ale'
+Plug 'github/copilot.vim'
 Plug 'muniftanjim/nui.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
@@ -92,6 +92,7 @@ set tabstop=2
 set expandtab
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
+let g:ale_python_auto_virtualenv = 1 
 let g:ale_disable_lsp = 1
 let g:ale_use_neovim_diagnostics_api = 1
 let g:ale_fix_on_save = 1
