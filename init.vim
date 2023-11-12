@@ -93,6 +93,7 @@ set expandtab
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 completeopt-=preview
 
 let g:ale_python_auto_virtualenv = 1 
+let g:ale_python_auto_poetry = 1 
 let g:ale_disable_lsp = 1
 let g:ale_use_neovim_diagnostics_api = 1
 let g:ale_fix_on_save = 1
