@@ -109,7 +109,7 @@ let g:ale_linters = {
 \   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
-\   'python': ['black', 'ruff'],
+\   'python': ['ruff'],
 \   'go': ['gofmt', 'goimports'],
 \   'rust': ['rustfmt'],
 \   'javascript': ['prettier'],
