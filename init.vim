@@ -3,7 +3,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
-Plug 'adam-blackwater/ale'
+Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 Plug 'muniftanjim/nui.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
