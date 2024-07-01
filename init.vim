@@ -124,5 +124,5 @@ let g:ale_fixers = {
 
 map <leader>x :Explore <CR>
 
-noremap <leader>p oimport pdb; pdb.set_trace()<Esc>
+noremap <leader>p ofrom IPython import embed; embed()<Esc>
 noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
