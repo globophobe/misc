@@ -3,6 +3,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'numToStr/FTerm.nvim'
+Plug 'Robitx/gp.nvim'
 Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 Plug 'muniftanjim/nui.nvim'
@@ -44,6 +45,51 @@ local gitui = fterm:new({
 vim.keymap.set('n', '<C-g>', function()
     gitui:toggle()
 end)
+
+
+local default_chat_system_prompt = "I am a programmer. I am asking you instead of searching stack overflow.\n"
+
+
+require("gp").setup({ 
+  providers = {
+    googleai = {
+			disable = false,
+			endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
+			secret = os.getenv("GOOGLEAI_API_KEY"),
+		},
+    copilot = {
+      disable = false,
+      endpoint = "https://api.githubcopilot.com/chat/completions",
+      secret = {
+        "bash",
+        "-c",
+        "cat ~/.config/github-copilot/hosts.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+			},
+		},
+  },
+  agents = {
+    {
+			provider = "googleai",
+			name = "ChatGemini",
+			chat = true,
+			command = true,
+			-- string with model name or table with model name and parameters
+			model = { model = "gemini-pro", temperature = 1.1, top_p = 1 },
+			-- system prompt (use this to specify the persona/role of the AI)
+			system_prompt = default_chat_system_prompt,
+		},
+    {
+      provider = "copilot",
+      name = "ChatCopilot",
+      chat = true,
+      command = true,
+      -- string with model name or table with model name and parameters
+      model = { model = "gpt-4", temperature = 1.1, top_p = 1 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = default_chat_system_prompt,
+    },
+  }
+})
 
 require('gitsigns').setup()
 EOF
@@ -109,7 +155,7 @@ let g:ale_linters = {
 \   'vue': ['eslint']
 \ }
 let g:ale_fixers = {
-\   'python': ['ruff'],
+\   'python': ['black', 'ruff'],
 \   'go': ['gofmt', 'goimports'],
 \   'rust': ['rustfmt'],
 \   'javascript': ['prettier'],
