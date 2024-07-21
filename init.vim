@@ -88,7 +88,8 @@ require("gp").setup({
       -- system prompt (use this to specify the persona/role of the AI)
       system_prompt = default_chat_system_prompt,
     },
-  }
+  },
+  chat_confirm_delete = false
 })
 
 require('gitsigns').setup()
@@ -170,5 +171,10 @@ let g:ale_fixers = {
 
 map <leader>x :Explore <CR>
 
-noremap <leader>p ofrom IPython import embed; embed()<Esc>
+noremap <leader>f :GpChatToggle<Esc>
+noremap <leader>p :GpChatPaste<Esc>
+noremap <leader>d :GpChatDelete<Esc>
+
+noremap <leader>e ofrom IPython import embed; embed()<Esc>
+noremap <leader>t ofrom import pdb; pdb.set_trace()<Esc>
 noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
