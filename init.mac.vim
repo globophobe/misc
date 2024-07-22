@@ -47,7 +47,12 @@ vim.keymap.set('n', '<C-g>', function()
     gitui:toggle()
 end)
 
+
+local default_chat_system_prompt = "I am a programmer. I am asking you instead of searching stack overflow.\n"
+
+
 require("gp").setup({ 
+  openai_api_key = 'fake',
   providers = {
     copilot = {
       disable = false,
