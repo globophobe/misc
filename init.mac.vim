@@ -160,7 +160,7 @@ noremap <leader>p :GpChatPaste<Esc>
 noremap <leader>d :GpChatDelete<Esc>
 
 noremap <leader>e ofrom IPython import embed; embed()<Esc>
-noremap <leader>t ofrom import pdb; pdb.set_trace()<Esc>
+noremap <leader>t oimport pdb; pdb.set_trace()<Esc>
 noremap <leader>c o// eslint-disable-next-line<Esc>oconsole.log()<Esc>
 
 let g:ale_python_ruff_options = '--config ~/stuff/misc/ruff.toml'
