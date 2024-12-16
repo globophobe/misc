@@ -77,6 +77,8 @@ augroup FiletypeGroup
 augroup END
 
 colorscheme nord
+highlight Visual ctermfg=NONE
+
 let mapleader = ','
 :tnoremap <Esc> <C-\><C-n>
 
