@@ -59,4 +59,4 @@ unfixable = ["F401", "F841"]
 "**/migrations/*" = ["ANN", "D"]
 
 [isort]
-known-first-party = ["api", "custom"]
+known-first-party = ["api", "custom", "pfront"]
