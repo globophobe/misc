@@ -49,7 +49,7 @@ end)
 require('gitsigns').setup()
 EOF
 
-map <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
 nnoremap <C-b> <cmd>Telescope registers<cr>
 nnoremap <C-s> <cmd>Telescope lsp_document_symbols<cr>
 
