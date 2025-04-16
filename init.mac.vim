@@ -6,13 +6,11 @@ Plug 'numToStr/FTerm.nvim'
 Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 Plug 'muniftanjim/nui.nvim'
-Plug 'jparise/vim-graphql'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'arcticicestudio/nord-vim'
-Plug 'rust-lang/rust.vim'
 call plug#end()
 
 lua << EOF
