@@ -71,6 +71,8 @@ inoremap <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 inoremap <expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
+autocmd FileType rust let b:coc_enabled = 0
+
 augroup FiletypeGroup
     autocmd!
     au BufNewFile,BufRead *.ts set filetype=typescript
@@ -102,7 +104,7 @@ let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \   'python': ['ruff'],
 \   'go': ['golangci-lint'],
-\   'rust': ['analyzer'],
+\   'rust': [],
 \   'html': [],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
